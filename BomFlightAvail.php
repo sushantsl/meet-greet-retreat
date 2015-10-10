@@ -7,7 +7,8 @@ class BomFlightAvail{
     var $duration;
     var $fare;
     var $class;
-    
+    var $bestOptionIndicator;
+
     function getAirline(){
         return $this->airline;
     }
@@ -49,6 +50,17 @@ class BomFlightAvail{
     }
     function setClass($class){
         $this->class = $class;
+    }
+    function isBestOption(){
+        if($this->bestOptionIndicator == true){
+            return true;
+        }
+        else{
+             return false;
+        }
+    }
+    function setBestOptionIndicator($value){
+        $this->bestOptionIndicator = $value;
     }
 }
 ?>

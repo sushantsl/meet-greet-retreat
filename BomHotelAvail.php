@@ -5,7 +5,8 @@ class BomHotelAvail{
     var $address;
     var $city;
     var $price;
-    
+    var $bestOptionIndicator;
+
     function getPropertyCode(){
         return $this->propertyCode;
     }
@@ -35,6 +36,17 @@ class BomHotelAvail{
     }
     function setPrice($price){
         $this->price = $price;
+    }
+    function isBestOption(){
+        if($this->bestOptionIndicator == true){
+            return true;
+        }
+        else{
+             return false;
+        }
+    }
+    function setBestOptionIndicator($value){
+        $this->bestOptionIndicator = $value;
     }
 }
 ?>
