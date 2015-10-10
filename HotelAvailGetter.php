@@ -1,4 +1,6 @@
 <?php
+include 'BomHotelAvail.php';
+
 class HotelAvailGetter{
     function getHotelAvail($checkIn, $checkOut, $city){
         //Returns the name and price of the cheapest/first result of the Sandbox output
@@ -8,12 +10,22 @@ class HotelAvailGetter{
              "&currency=INR&number_of_results=1";
         $hotels = file_get_contents($api);
         $hotels = json_decode($hotels,true);
-        $response = "";
+        $filledBoms = array();
         foreach ($hotels['results'] as $results){
-            echo "Property Name: ".$results['property_name']."(".$results['property_code'].")"."<br/>";
-            echo "Address: ".$results['address']['line1']."<br/>";
-            echo "City: ".$results['address']['city']."<br/>";
-            echo "Price:".$results['total_price']['amount']."<br/>";
+            $theBomHotelAvail = new BomHotelAvail;
+            $theBomHotelAvail->setPropertyCode($results['property_code']);
+            $theBomHotelAvail->setPropertyName($results['property_name']);
+            $theBomHotelAvail->setAddress($results['address']['line1']);
+            $theBomHotelAvail->setCity($results['address']['city']);
+            $theBomHotelAvail->setPrice($results['total_price']['amount']);
+            array_push($filledBoms,$theBomHotelAvail);
+        }
+        foreach ($filledBoms as $bom){
+            echo "Property Name: ".$bom->getPropertyName()."(".$bom->getPropertyCode().")"."<br/>";
+            echo "Address: ".$bom->getAddress()."<br/>";
+            echo "City: ".$bom->getCity()."<br/>";
+            echo "Price:".$bom->getPrice()."<br/>";
+            echo "<hr/>";
         }
     }
 }

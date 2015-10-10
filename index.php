@@ -38,7 +38,7 @@ for ($i=0 ; $i < count($userDesitinationCities) ; $i++){
         //TODO: Put this result in a Bom
         $leavingDate = date("Y-m-d",$listSaturdays[$j]);
         $returningDate = date("Y-m-d",$listSundays[$j]);
-        $theFlightAvailGetter->getAirAvail($leavingDate, $returningDate, $userOriginCity, $userDesitinationCities[$i]);
+        $theFlightAvailGetter->getFlightAvail($leavingDate, $returningDate, $userOriginCity, $userDesitinationCities[$i]);
     }
 }
 
@@ -52,6 +52,7 @@ for ($i=0 ; $i < count($userDesitinationCities) ; $i++){
         $theHotelAvailGetter->getHotelAvail($checkIn, $checkOut, $userDesitinationCities[$i]);
     }
 }
+
 //Consolidate results city-wise
 //Organize output by associating friend to city and results
 
